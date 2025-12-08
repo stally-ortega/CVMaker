@@ -5,6 +5,7 @@
 Este proyecto es una aplicación web moderna y de código abierto diseñada para ayudar a los usuarios a crear Curriculums Vitae (CV) limpios, estructurados y optimizados para Sistemas de Seguimiento de Candidatos (ATS). Construido con las últimas tecnologías web, enfatiza el rendimiento, la simplicidad y la privacidad del usuario.
 
 ![ATS CV Builder Preview](images/preview.png)
+*Imagen de muestra tomada de [GitHub Pages](https://stally-ortega.github.io/CVMaker/)*
 
 
 ## 🚀 Características Principales
