@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy:gh": "ng build --configuration=production --base-href /cv-maker/ && npx angular-cli-ghpages --dir=dist/ats-cv-builder/browser"
+    "deploy:gh": "ng build --configuration=production --base-href /CVMaker/ && npx angular-cli-ghpages --dir=dist/ats-cv-builder/browser"
   },
   "prettier": {
     "printWidth": 100,
