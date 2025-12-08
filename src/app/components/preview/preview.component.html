@@ -1,0 +1,95 @@
+<div id="print-area" class="a4-page bg-white text-gray-900 font-sans text-sm leading-normal shadow-lg mx-auto overflow-hidden flex flex-col justify-between gap-5">
+  <!-- Header -->
+  <div class="border-b-2 border-gray-800 pb-4">
+    <h1 class="text-3xl font-bold uppercase tracking-wide text-gray-900 mb-2">{{ resume().profile.fullName }}</h1>
+    <div class="contact-line flex flex-wrap gap-x-4 text-gray-700 text-xs">
+      <span *ngIf="resume().profile.location" class="flex items-center gap-1">
+         {{ resume().profile.location }}
+      </span>
+      <span *ngIf="resume().profile.email" class="flex items-center gap-1">
+         {{ resume().profile.email }}
+      </span>
+      <span *ngIf="resume().profile.phone" class="flex items-center gap-1">
+         {{ resume().profile.phone }}
+      </span>
+      <span *ngIf="resume().profile.linkedin" class="flex items-center gap-1">
+         <a [href]="getUrl(resume().profile.linkedin)" class="text-blue-700 hover:underline">{{ resume().profile.linkedin }}</a>
+      </span>
+      <span *ngIf="resume().profile.github" class="flex items-center gap-1">
+         <a [href]="getUrl(resume().profile.github)" class="text-blue-700 hover:underline">{{ resume().profile.github }}</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div *ngIf="resume().profile.summary">
+    <h2 class="section-title">Perfil Profesional</h2>
+    <p class="text-gray-700 whitespace-pre-line">{{ resume().profile.summary }}</p>
+  </div>
+
+  <!-- Experience -->
+  <div *ngIf="resume().experience.length">
+    <h2 class="section-title">Experiencia Laboral</h2>
+    <div *ngFor="let job of resume().experience" class="mb-4 break-inside-avoid">
+      <div class="flex justify-between items-baseline mb-1">
+        <h3 class="font-bold text-gray-800 text-base">
+            {{ job.role }} <span class="text-gray-400 mx-1">|</span> <span class="font-semibold text-gray-700">{{ job.company }}</span>
+        </h3>
+        <span class="text-gray-600 text-xs font-semibold whitespace-nowrap">{{ job.startDate }} - {{ job.current ? 'Presente' : job.endDate }}</span>
+      </div>
+      <div class="mb-2">
+         <span class="text-gray-500 text-xs italic">{{ job.location }}</span>
+      </div>
+      <ul class="list-disc list-inside text-gray-700 space-y-0.5 ml-1">
+        <li *ngFor="let duty of splitLines(job.duties)">{{ duty }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Projects (NEW) -->
+  <div *ngIf="resume().projects.length">
+    <h2 class="section-title">Proyectos Destacados</h2>
+    <div *ngFor="let proj of resume().projects" class="mb-4 break-inside-avoid">
+        <div class="mb-1 border-l-2 border-gray-300 pl-2">
+            <div class="flex flex-wrap items-baseline gap-2">
+                <h3 class="font-bold text-gray-800 text-base">{{ proj.name }}</h3>
+                <span class="text-gray-400">|</span>
+                <span class="font-semibold text-gray-700 text-sm">{{ proj.role }}</span>
+                <span class="text-gray-400">|</span>
+                <span class="text-gray-600 text-sm italic">{{ proj.stack }}</span>
+            </div>
+             <a *ngIf="proj.link" [href]="getUrl(proj.link)" class="text-xs text-blue-600 hover:underline block mb-1">Ver Proyecto</a>
+        </div>
+        
+        <p class="text-gray-700 whitespace-pre-line mb-1 pl-2">{{ proj.description }}</p>
+        
+        <div *ngIf="proj.keywords" class="pl-2 mt-1">
+            <span class="text-xs font-bold text-gray-600">Keywords: </span>
+            <span class="text-xs text-gray-600 italic">{{ proj.keywords }}</span>
+        </div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div *ngIf="resume().education.length">
+    <h2 class="section-title">Educación</h2>
+    <div *ngFor="let edu of resume().education" class="mb-3 break-inside-avoid">
+      <div class="flex justify-between items-baseline">
+        <h3 class="font-bold text-gray-800">{{ edu.institution }}</h3>
+        <span class="text-gray-600 text-xs font-semibold">{{ edu.graduationDate }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-gray-700">{{ edu.degree }}</span>
+        <span class="text-gray-500 text-xs">{{ edu.location }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div *ngIf="resume().skills.length">
+    <h2 class="section-title">Habilidades Técnicas</h2>
+    <div class="flex flex-wrap gap-2 text-gray-700">
+         <span *ngFor="let skill of resume().skills; let last = last">{{ skill }}<span *ngIf="!last" class="text-gray-400"> | </span></span>
+    </div>
+  </div>
+</div>

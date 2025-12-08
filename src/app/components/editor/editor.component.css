@@ -1,0 +1,15 @@
+.section-box {
+    @apply bg-white rounded border border-gray-200 overflow-hidden shadow-sm;
+}
+
+.section-header {
+    @apply w-full flex justify-between items-center p-4 bg-gray-100 font-bold text-gray-700 hover:bg-gray-200 text-left;
+}
+
+.form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+}
+
+.form-input {
+    @apply w-full rounded border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm p-2 border;
+}

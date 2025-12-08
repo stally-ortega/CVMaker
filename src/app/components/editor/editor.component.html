@@ -1,0 +1,188 @@
+<div class="bg-gray-50 h-full overflow-y-auto p-6 shadow-inner">
+    <div class="flex justify-between items-center mb-6 gap-2">
+        <h2 class="text-2xl font-bold text-gray-800">Editor de CV</h2>
+        <div class="flex gap-2">
+            <input type="file" #fileInput (change)="importData($event)" class="hidden" accept=".json">
+            <button (click)="fileInput.click()"
+                class="bg-green-600 text-white px-3 py-2 rounded shadow hover:bg-green-700 font-semibold text-xs flex items-center gap-1"
+                title="Cargar JSON">
+                <span>📂 Importar</span>
+            </button>
+            <button (click)="exportData()"
+                class="bg-gray-600 text-white px-3 py-2 rounded shadow hover:bg-gray-700 font-semibold text-xs flex items-center gap-1"
+                title="Guardar JSON">
+                <span>💾 Guardar</span>
+            </button>
+            <button (click)="exportPdf()"
+                class="bg-blue-600 text-white px-3 py-2 rounded shadow hover:bg-blue-700 font-semibold text-xs flex items-center gap-1"
+                title="Descargar PDF">
+                <span>📄 PDF</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="space-y-4" [formGroup]="form">
+
+        <!-- Profile Section -->
+        <div class="section-box">
+            <button (click)="toggle('profile')" class="section-header">
+                <span>Información Personal</span>
+                <span class="transform transition-transform" [class.rotate-180]="openSection === 'profile'">▼</span>
+            </button>
+
+            <div *ngIf="openSection === 'profile'" class="p-4 space-y-4" formGroupName="profile">
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="form-label">
+                        Nombre Completo
+                        <input formControlName="fullName" class="form-input" placeholder="Juan Pérez">
+                    </label>
+                    <label class="form-label">
+                        Resumen Profesional
+                        <span class="text-xs font-normal text-gray-500">(Aparece destacado)</span>
+                    </label>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="form-label">Email <input formControlName="email" class="form-input"></label>
+                    <label class="form-label">Teléfono <input formControlName="phone" class="form-input"></label>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="form-label">Ubicación <input formControlName="location" class="form-input"></label>
+                    <label class="form-label">LinkedIn (URL) <input formControlName="linkedin"
+                            class="form-input"></label>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="form-label">GitHub (URL) <input formControlName="github" class="form-input"></label>
+                </div>
+                <label class="form-label">
+                    Extracto / Perfil (Summary)
+                    <textarea formControlName="summary" rows="4" class="form-input"
+                        placeholder="Breve descripción de tu perfil..."></textarea>
+                </label>
+            </div>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="section-box">
+            <button (click)="toggle('experience')" class="section-header">
+                <span>Experiencia Laboral</span>
+                <button type="button" (click)="addExperience($event)" class="text-blue-600 text-sm hover:underline">+
+                    Añadir</button>
+            </button>
+
+            <div *ngIf="openSection === 'experience'" class="p-4 space-y-6" formArrayName="experience">
+                <div *ngFor="let exp of experienceControls.controls; let i = index" [formGroupName]="i"
+                    class="border-l-4 border-blue-500 pl-4 py-2 bg-gray-50 text-sm">
+                    <div class="flex justify-end mb-2">
+                        <button type="button" (click)="removeExperience(i)"
+                            class="text-red-500 text-xs hover:underline">Eliminar</button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <input formControlName="role" placeholder="Cargo / Rol" class="form-input font-bold">
+                        <input formControlName="company" placeholder="Empresa" class="form-input">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div class="flex gap-2">
+                            <input formControlName="startDate" type="text" placeholder="Inicio (AAAA-MM)"
+                                class="form-input">
+                            <input formControlName="endDate" type="text" placeholder="Fin" class="form-input">
+                        </div>
+                        <input formControlName="location" placeholder="Ubicación" class="form-input">
+                    </div>
+                    <label class="flex items-center gap-2 mb-3 text-gray-600">
+                        <input type="checkbox" formControlName="current" class="form-checkbox"> Trabajo aquí actualmente
+                    </label>
+                    <textarea formControlName="duties" rows="3"
+                        placeholder="Responsabilidades (Usa saltos de línea para bullets)"
+                        class="form-input"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section (NEW) -->
+        <div class="section-box">
+            <button (click)="toggle('projects')" class="section-header">
+                <span>Proyectos Destacados</span>
+                <button type="button" (click)="addProject($event)" class="text-blue-600 text-sm hover:underline">+
+                    Añadir</button>
+            </button>
+
+            <div *ngIf="openSection === 'projects'" class="p-4 space-y-6" formArrayName="projects">
+                <div *ngFor="let proj of projectsControls.controls; let i = index" [formGroupName]="i"
+                    class="border-l-4 border-green-500 pl-4 py-2 bg-gray-50 text-sm">
+                    <div class="flex justify-end mb-2">
+                        <button type="button" (click)="removeProject(i)"
+                            class="text-red-500 text-xs hover:underline">Eliminar</button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <input formControlName="name" placeholder="Nombre del Proyecto" class="form-input font-bold">
+                        <input formControlName="role" placeholder="Tu Rol" class="form-input">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <input formControlName="stack" placeholder="Tech Stack (n8n, Python...)" class="form-input">
+                        <input formControlName="link" placeholder="Enlace (GitHub/Demo)" class="form-input">
+                    </div>
+                    <div class="mb-3">
+                        <textarea formControlName="description" rows="3" placeholder="Descripción de lo que hiciste..."
+                            class="form-input"></textarea>
+                    </div>
+                    <div>
+                        <input formControlName="keywords" placeholder="Keywords (para ATS): Automation, Backend..."
+                            class="form-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="section-box">
+            <button (click)="toggle('education')" class="section-header">
+                <span>Educación</span>
+                <button type="button" (click)="addEducation($event)" class="text-blue-600 text-sm hover:underline">+
+                    Añadir</button>
+            </button>
+
+            <div *ngIf="openSection === 'education'" class="p-4 space-y-6" formArrayName="education">
+                <div *ngFor="let edu of educationControls.controls; let i = index" [formGroupName]="i"
+                    class="border-l-4 border-purple-500 pl-4 py-2 bg-gray-50 text-sm">
+                    <div class="flex justify-end mb-2">
+                        <button type="button" (click)="removeEducation(i)"
+                            class="text-red-500 text-xs hover:underline">Eliminar</button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <input formControlName="degree" placeholder="Título / Grado" class="form-input font-bold">
+                        <input formControlName="institution" placeholder="Institución" class="form-input">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <input formControlName="graduationDate" type="text" placeholder="Año Graduación"
+                            class="form-input">
+                        <input formControlName="location" placeholder="Ubicación" class="form-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section-box">
+            <button (click)="toggle('skills')" class="section-header">
+                <span>Habilidades (Skills)</span>
+                <span class="text-xs text-gray-500 font-normal ml-2">(Separadas por comas)</span>
+            </button>
+            <div *ngIf="openSection === 'skills'" class="p-4">
+                <textarea [formControl]="skillsControl" (blur)="updateSkills()" class="form-input" rows="4"
+                    placeholder="Angular, TypeScript, Tailwind CSS..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Section -->
+    <div class="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800">
+        <h3 class="font-bold mb-2">Consejos Anti-Filtros (ATS)</h3>
+        <ul class="list-disc list-inside space-y-1">
+            <li><strong>Columna Única:</strong> Los robots leen de arriba a abajo. Evita columnas laterales.</li>
+            <li><strong>Fuentes Estándar:</strong> Sans-serif como Arial/Helvetica son las más seguras.</li>
+            <li><strong>Stack Explícito:</strong> Pon "PostgreSQL" junto al título del proyecto para matar dos pájaros
+                de un tiro.</li>
+            <li><strong>Keywords:</strong> Usa términos de la descripción del trabajo en tu resumen y skills.</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+.a4-page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 15mm 20mm;
+  box-sizing: border-box;
+}
+.section-title {
+  @apply text-lg font-bold text-gray-800 uppercase tracking-wider mb-3 border-b border-gray-300 pb-1;
+}
+svg { display: inline-block; vertical-align: text-bottom; }
