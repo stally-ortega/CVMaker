@@ -1,59 +1,88 @@
-# AtsCvBuilder
+# ATS-Ready CV Builder
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.2.
+> **Crea CVs profesionales y optimizados para ATS en tiempo real.**
 
-## Development server
+Este proyecto es una aplicación web moderna y de código abierto diseñada para ayudar a los usuarios a crear Curriculums Vitae (CV) limpios, estructurados y optimizados para Sistemas de Seguimiento de Candidatos (ATS). Construido con las últimas tecnologías web, enfatiza el rendimiento, la simplicidad y la privacidad del usuario.
 
-To start a local development server, run:
+![ATS CV Builder Preview](images/preview.png)
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🚀 Características Principales
 
-## Code scaffolding
+*   **Diseño Optimizado para ATS**: Diseño de una sola columna, centrado en texto, asegurando máxima compatibilidad con los analizadores ATS.
+*   **Vista Previa en Tiempo Real**: Interfaz de pantalla dividida que muestra actualizaciones instantáneas mientras escribes.
+*   **Privacidad Primero**: Todos los datos se almacenan localmente en tu navegador (`LocalStorage`). No se envía ningún dato a ningún servidor.
+*   **Exportación a PDF**: Exportación nativa del navegador a PDF con un solo clic.
+*   **Stack Tecnológico Moderno**: Construido con Angular 18+ (Componentes Standalone, Signals) y TailwindCSS.
+*   **Responsivo**: Funciona perfectamente en dispositivos de escritorio y tabletas.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠️ Stack Tecnológico
 
-```bash
-ng generate component component-name
-```
+Este proyecto aprovecha lo último del ecosistema Angular:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+*   **Framework**: [Angular](https://angular.io/) (Última Versión)
+    *   **Componentes Standalone**: Sin NgModules, reduciendo el código repetitivo.
+    *   **Signals**: Gestión de estado granular y reactiva para alto rendimiento.
+    *   **Reactive Forms**: Formularios estrictamente tipados para un manejo robusto de datos.
+*   **Estilos**: [TailwindCSS](https://tailwindcss.com/) - CSS basado en utilidades para un desarrollo de UI rápido y consistente.
+*   **Herramientas**:
+    *   **Bun**: Runtime de JavaScript y gestor de paquetes todo en uno de alta velocidad.
+    *   **Vite/Esbuild**: El nuevo sistema de construcción de alto rendimiento de Angular.
+*   **Despliegue**: Ejecuta el comando `ng deploy:gh` para desplegar la aplicación en GitHub Pages.
 
-```bash
-ng generate --help
-```
+## 🏗️ Arquitectura
 
-## Building
+La aplicación está estructurada para escalabilidad y mantenibilidad:
 
-To build the project run:
+*   **Gestión de Estado**: Un `ResumeService` centralizado utiliza Angular Signals para gestionar el estado de los datos del CV, proporcionando una única fuente de verdad que alimenta tanto al componente Editor como al de Vista Previa.
+*   **Diseño de Componentes**:
+    *   `EditorComponent`: Maneja la entrada del usuario a través de Reactive Forms.
+    *   `PreviewComponent`: Componente de presentación pura que reacciona a los cambios de estado.
+*   **Persistencia**: Los datos se guardan automáticamente en `LocalStorage` con cada cambio, asegurando que nunca pierdas tu trabajo al recargar.
 
-```bash
-ng build
-```
+## 📦 Empezando
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Requisitos Previos
 
-## Running unit tests
+*   **Node.js** (v18+) o **Bun** (v1+)
+*   **Git**
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Instalación
 
-```bash
-ng test
-```
+1.  **Clonar el repositorio**:
+    ```bash
+    git clone https://github.com/stally-ortega/cv-maker.git
+    cd cv-maker
+    ```
 
-## Running end-to-end tests
+2.  **Instalar dependencias**:
+    ```bash
+    npm install
+    # O si usas Bun
+    bun install
+    ```
 
-For end-to-end (e2e) testing, run:
+3.  **Ejecutar el servidor de desarrollo**:
+    ```bash
+    ng serve
+    ```
+    Navega a `http://localhost:4200/` o prueba online en [GitHub Pages](https://stally-ortega.github.io/CVMaker/).
 
-```bash
-ng e2e
-```
+## 🤝 Contribuciones
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+¡Las contribuciones son bienvenidas! Este es un proyecto de código abierto y nos encanta la participación de la comunidad.
 
-## Additional Resources
+1.  **Haz un Fork** del repositorio.
+2.  Crea una nueva **Rama** para tu funcionalidad o corrección (`git checkout -b feature/FuncionalidadAsombrosa`).
+3.  **Haz Commit** de tus cambios (`git commit -m 'Agrega alguna FuncionalidadAsombrosa'`).
+4.  **Haz Push** a la rama (`git push origin feature/FuncionalidadAsombrosa`).
+5.  Abre un **Pull Request**.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Por favor, asegúrate de que tu código siga las guías de estilo existentes e incluya comentarios relevantes.
+
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la **Licencia MIT** - mira el archivo [LICENSE](LICENSE) para más detalles.
+
+---
+*Creado con ❤️ por [Stally Ortega]*
