@@ -1,0 +1,4 @@
+/* Base modal styles if needed outside Tailwind */
+:host {
+    display: block;
+}

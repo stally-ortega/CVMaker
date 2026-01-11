@@ -13,6 +13,11 @@
                 title="Guardar JSON">
                 <span>💾 Guardar</span>
             </button>
+            <button (click)="exportTex()"
+                class="bg-purple-600 text-white px-3 py-2 rounded shadow hover:bg-purple-700 font-semibold text-xs flex items-center gap-1"
+                title="Exportar Código LaTeX">
+                <span>📄 TeX</span>
+            </button>
             <button (click)="exportPdf()"
                 class="bg-blue-600 text-white px-3 py-2 rounded shadow hover:bg-blue-700 font-semibold text-xs flex items-center gap-1"
                 title="Descargar PDF">
@@ -185,4 +190,25 @@
             <li><strong>Keywords:</strong> Usa términos de la descripción del trabajo en tu resumen y skills.</li>
         </ul>
     </div>
+
+    <!-- MODALS -->
+    <app-modal [isOpen]="showPdfWarning" title="⚠️ Formato PDF" message="Estás a punto de descargar un PDF generado por el navegador. 
+    
+    Aunque visualmente imita a LaTeX, **NO** es un archivo LaTeX compilado nativamente.
+    ¿Deseas proceder de todos modos?" confirmText="Sí, descargar PDF" cancelText="Cancelar" (confirm)="confirmPdf()"
+        (cancel)="showPdfWarning = false">
+    </app-modal>
+
+    <app-modal [isOpen]="showTexWarning" title="ℹ️ Exportar a LaTeX" message="Se descargará un archivo de código fuente (.tex).
+    
+    Este archivo **NO** es un PDF. Para verlo correctamente, debes compilarlo en un editor LaTeX."
+        confirmText="Descargar .tex" cancelText="Cancelar" (confirm)="confirmTex()" (cancel)="showTexWarning = false">
+
+        <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded text-sm">
+            <p class="font-bold text-blue-800 mb-1">Recomendación Gratuita:</p>
+            <p class="text-blue-700">Puedes compilar este archivo gratis y sin instalación en:</p>
+            <a href="https://www.overleaf.com/" target="_blank"
+                class="text-blue-600 underline font-semibold hover:text-blue-800">Overleaf.com (Recomendado)</a>
+        </div>
+    </app-modal>
 </div>

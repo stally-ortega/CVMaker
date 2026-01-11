@@ -14,6 +14,7 @@ Este proyecto es una aplicación web moderna y de código abierto diseñada para
 *   **Vista Previa en Tiempo Real**: Interfaz de pantalla dividida que muestra actualizaciones instantáneas mientras escribes.
 *   **Privacidad Primero**: Todos los datos se almacenan localmente en tu navegador (`LocalStorage`). No se envía ningún dato a ningún servidor.
 *   **Exportación a PDF**: Exportación nativa del navegador a PDF con un solo clic.
+*   **Generación de PDF estilo LaTeX**: El CV final se exporta con un **diseño académico profesional**, utilizando la tipografía **Computer Modern** y una maquetación vectorial de alta fidelidad, asegurando compatibilidad total con ATS (Applicant Tracking Systems) y una presentación impecable.
 *   **Exportación/Importación JSON**: Guarda tus datos en un archivo JSON para editarlos más tarde o moverlos entre dispositivos.
 *   **Stack Tecnológico Moderno**: Construido con Angular 18+ (Componentes Standalone, Signals) y TailwindCSS.
 *   **Responsivo**: Funciona perfectamente en dispositivos de escritorio y tabletas.

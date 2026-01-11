@@ -1,10 +1,110 @@
+/* DESIGN 2: Modern Academic */
+/* Accent Color: Navy Blue (#1a365d) */
+
+/* Import Fonts: Roboto (Sans for Headers) and EB Garamond (Serif for Body) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --accent-color: #1a365d;
+  /* Professional Deep Navy */
+  --text-color: #1a1a1a;
+  /* Softer Black */
+}
+
 .a4-page {
   width: 210mm;
   min-height: 297mm;
   padding: 15mm 20mm;
   box-sizing: border-box;
+
+  /* Body Text: Elegant Serif */
+  font-family: 'EB Garamond', serif;
+  color: var(--text-color);
+  line-height: 1.35;
+  /* Improved readability */
 }
+
 .section-title {
-  @apply text-lg font-bold text-gray-800 uppercase tracking-wider mb-3 border-b border-gray-300 pb-1;
+  /* Modern Header: Sans-Serif, Accent Color, Underlined */
+  font-family: 'Roboto', sans-serif;
+  color: var(--accent-color);
+
+  border-bottom: 2px solid var(--accent-color);
+  /* Thicker, colored line */
+  margin-bottom: 12px;
+  padding-bottom: 4px;
+
+  font-size: 13pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
-svg { display: inline-block; vertical-align: text-bottom; }
+
+h1 {
+  /* Name Header: Large, Sans-Serif, Bold */
+  font-family: 'Roboto', sans-serif;
+  color: var(--accent-color);
+
+  font-size: 26pt;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 6px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.contact-line {
+  text-align: center;
+  font-size: 10pt;
+  margin-bottom: 20px;
+  color: #4a5568;
+  /* Slightly lighter for metadata */
+  font-family: 'Roboto', sans-serif;
+  /* Clean look for emails/phones */
+}
+
+/* Specific styling for structured data to look less "flat" */
+
+/* Experience/Education Role & School in Bold Serif */
+.job-title,
+.degree-title {
+  font-weight: 600;
+  color: #000;
+  font-size: 12pt;
+}
+
+/* Company & Location in Sans-Serif Italic or subdued */
+.company-name,
+.institution-name {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+/* Dates aligned right, monospaced numeric feel or clean sans */
+.date-range {
+  font-family: 'Roboto', sans-serif;
+  font-size: 9.5pt;
+  color: #718096;
+}
+
+ul {
+  padding-left: 18px;
+  margin-top: 4px;
+}
+
+li {
+  margin-bottom: 3px;
+  text-align: justify;
+  /* Academic justification */
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+}

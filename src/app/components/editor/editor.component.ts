@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ResumeService } from '../../services/resume.service';
 import { Resume, Experience, Education, Project } from '../../models/resume.models';
+import { ModalComponent } from '../modal/modal.component';
+import { generateLatex } from '../../utils/latex-generator';
 
 /**
  * Editor form providing the UI for data input.
@@ -13,7 +15,7 @@ import { Resume, Experience, Education, Project } from '../../models/resume.mode
 @Component({
   selector: 'app-editor',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ModalComponent],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.css'
 })
@@ -24,6 +26,10 @@ export class EditorComponent {
   form!: FormGroup;
   skillsControl = this.fb.control('');
   openSection = 'profile';
+
+  // Modal States
+  showPdfWarning = false;
+  showTexWarning = false;
 
   constructor() {
     this.initForm(this.resumeService.resume());
@@ -269,7 +275,40 @@ export class EditorComponent {
   /**
    * Invokes the browser's native print dialog to generating the PDF.
    */
+  /**
+   * Trigger the PDF export process (opens warning modal first).
+   */
   exportPdf() {
+    this.showPdfWarning = true;
+  }
+
+  /**
+   * Confirms PDF generation via browser print.
+   */
+  confirmPdf() {
+    this.showPdfWarning = false;
     window.print();
+  }
+
+  /**
+   * Trigger the TeX export process (opens info modal first).
+   */
+  exportTex() {
+    this.showTexWarning = true;
+  }
+
+  /**
+   * Generates and downloads the .tex file.
+   */
+  confirmTex() {
+    this.showTexWarning = false;
+    const texContent = generateLatex(this.resumeService.resume());
+    const blob = new Blob([texContent], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `resume-${new Date().toISOString().split('T')[0]}.tex`;
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
 }

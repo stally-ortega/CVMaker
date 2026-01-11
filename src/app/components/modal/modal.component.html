@@ -1,0 +1,30 @@
+<div *ngIf="isOpen"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm transition-opacity">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 overflow-hidden transform transition-all scale-100">
+        <!-- Header -->
+        <div class="bg-gray-100 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-gray-800">{{ title }}</h3>
+            <button (click)="onCancel()" class="text-gray-500 hover:text-gray-700 font-bold text-xl">&times;</button>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6">
+            <p class="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{{ message }}</p>
+
+            <!-- Slot for extra content like links -->
+            <ng-content></ng-content>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-gray-50 px-6 py-4 border-t border-gray-200 flex justify-end gap-3">
+            <button (click)="onCancel()"
+                class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 font-semibold text-sm transition-colors">
+                {{ cancelText }}
+            </button>
+            <button (click)="onConfirm()"
+                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 font-semibold text-sm transition-colors shadow-sm">
+                {{ confirmText }}
+            </button>
+        </div>
+    </div>
+</div>
